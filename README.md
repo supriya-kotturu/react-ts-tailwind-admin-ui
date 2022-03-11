@@ -19,7 +19,17 @@
   npm run preview
   ```
 
-##
+## Todo
+
+- [x] set up tailwind.css - reusable classnames with @apply
+- [ ] Dashboard Component - fetches the usernames and passes down
+  - [ ] Seach Component - child of Dashboard
+  - [ ] List Component - table component containing the list of user
+    - [ ] Implement checkbox-select
+    - [ ] Edit User
+    - [ ] Delete User
+- [ ] Pagination
+- [ ] Optimize component rerendering
 
 ## Tech stack
 
