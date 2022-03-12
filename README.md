@@ -22,7 +22,7 @@
 ## Todo
 
 - [x] set up tailwind.css - reusable classnames with @apply
-- [ ] Dashboard Component - fetches the usernames and passes down
+- [x] Dashboard Component - fetches the usernames and passes down
   - [ ] Seach Component - child of Dashboard
   - [ ] List Component - table component containing the list of user
     - [ ] Implement checkbox-select
