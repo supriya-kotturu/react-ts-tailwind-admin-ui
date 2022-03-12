@@ -5,7 +5,8 @@ export interface User {
 	role: string;
 }
 
-export interface Error {
-	status: string;
-	message: string;
+export interface Message {
+	type?: 'SUCCESS' | 'FAIL' | '';
+	title: string;
+	description: string;
 }
