@@ -1,5 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import axios from 'axios';
+import { SearchBar } from './SearchBar';
 
 import { UserList } from './UserList';
 import { User } from '../interfaces';
@@ -19,5 +20,10 @@ export const Dashboard = () => {
 		setUsers(data);
 	}, []);
 
-	return <>{users.length > 0 && <UserList users={users} />}</>;
+	return (
+		<div className="table-container">
+			<SearchBar />
+			{users.length > 0 && <UserList users={users} />}
+		</div>
+	);
 };

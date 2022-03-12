@@ -1,66 +1,100 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useMemo } from 'react';
+import { useTable } from 'react-table';
 import { User } from '../interfaces';
 
 interface UserListProps {
 	users: User[];
 	children?: ReactNode;
 }
+
+interface UserTableColumns {
+	Header: string;
+	accessor: keyof User;
+}
+
+const USER_LIST_COLUMNS: UserTableColumns[] = [
+	{
+		Header: 'Id',
+		accessor: 'id',
+	},
+	{
+		Header: 'Name',
+		accessor: 'name',
+	},
+	{
+		Header: 'Email',
+		accessor: 'email',
+	},
+	{
+		Header: 'Role',
+		accessor: 'role',
+	},
+	// TODO : Remove the action
+	// {
+	// 	Header: 'Actions',
+	// 	accessor: 'id',
+	// },
+];
+
 export const UserList = ({ users }: UserListProps) => {
-	console.log('hehee in ', users);
+	const userTableColumns = useMemo(() => USER_LIST_COLUMNS, []);
+	const userData = useMemo(() => users, []);
+
+	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
+		useTable({
+			columns: userTableColumns,
+			data: userData,
+		});
+
 	return (
-		<div className="bg-indigo-100 dark:bg-slate-600 p-2 lg:w-3/5 mx-auto md:w-full rounded-lg shadow-lg">
+		<div>
 			<table
-				className="table-auto items-center w-full border-separate"
+				className="user-table"
 				cellSpacing={8}
 				cellPadding={4}
+				{...getTableProps()}
 			>
 				<thead>
-					<tr className="bg-indigo-100 dark:bg-slate-600 text-indigo-900 rounded-lg p-4">
-						<th className="lg:p-4 md:p-3.5 bg-indigo-200 dark:bg-slate-900 dark:text-indigo-100 shadow-lg rounded-lg text-left">
-							Select all
-						</th>
-						<th className="lg:p-4 md:p-3.5 bg-indigo-200 dark:bg-slate-900 dark:text-indigo-100 shadow-lg rounded-lg text-left">
-							ID
-						</th>
-						<th className="lg:p-4 md:p-3.5 bg-indigo-200 dark:bg-slate-900 dark:text-indigo-100 shadow-lg rounded-lg text-left">
-							Name
-						</th>
-						<th className="lg:p-4 md:p-3.5 bg-indigo-200 dark:bg-slate-900 dark:text-indigo-100  shadow-lg rounded-lg text-left">
-							Email
-						</th>
-						<th className="lg:p-4 md:p-3.5 bg-indigo-200 dark:bg-slate-900 dark:text-indigo-100 shadow-lg rounded-lg text-left">
-							Role
-						</th>
-						<th className="lg:p-4 md:p-3.5 bg-indigo-200 dark:bg-slate-900 dark:text-indigo-100 shadow-lg rounded-lg text-left">
-							Actions
-						</th>
-					</tr>
+					{headerGroups.map((headerGroup) => (
+						<tr className="header-row" {...headerGroup.getHeaderGroupProps()}>
+							{headerGroup.headers.map((column) => (
+								<th {...column.getHeaderProps()}>{column.render('Header')}</th>
+							))}
+						</tr>
+					))}
 				</thead>
-				<tbody>
-					{users.map((user: User) => {
+				<tbody {...getTableBodyProps()}>
+					{rows.map((row) => {
+						prepareRow(row);
 						return (
-							<tr key={user.id}>
-								<td className="text-center lg:p-4 md:p-3.5 bg-slate-50 shadow-lg dark:bg-slate-700 dark:text-indigo-100 rounded-lg m-2 py-4 px-2 w-1">
-									[]{' '}
-								</td>
-								<td className="text-center lg:p-4 md:p-3.5 bg-slate-50 shadow-lg  dark:bg-slate-700 dark:text-indigo-100 rounded-lg m-2 py-4 px-2 w-1">
-									{user.id}
-								</td>
-								<td className="text-left lg:p-4 md:p-3.5 bg-slate-50 shadow-lg   dark:bg-slate-700 dark:text-indigo-100 rounded-lg m-2 py-4 px-2 w-4">
-									{user.name}
-								</td>
-								<td className="text-left lg:p-4 md:p-3.5 bg-slate-50 shadow-lg dark:bg-slate-700  dark:text-indigo-100 rounded-lg  m-2 py-4 px-2 w-6">
-									{user.email}
-								</td>
-								<td className="text-left lg:p-4 md:p-3.5 bg-slate-50 shadow-lg dark:bg-slate-700 dark:text-indigo-100 rounded-lg  m-2 py-4 px-2 w-3">
-									{user.role}
-								</td>
-								<td className="text-center lg:p-4 md:p-3.5 bg-slate-50 shadow-lg dark:bg-slate-700 dark:text-indigo-100 rounded-lg  m-2 py-4 px-2 w-3">
-									[] []
-								</td>
+							<tr {...row.getRowProps()}>
+								{row.cells.map((cell) => {
+									return (
+										<td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+									);
+								})}
 							</tr>
 						);
 					})}
+
+					{/* TODO : Remove comments  */}
+					{/* {users.map((user: User) => {
+						return (
+							<tr key={user.id}>
+								<td className="text-center  w-1">
+									<input
+										type="checkbox"
+										className="form-check-input h-5 w-5 border border-r-10 border-indigo-900 rounded-lg bg-white checked:bg-indigo-100 checked:border-indigo-200 focus:outline-none transition duration-200 bg-center cursor-pointer"
+									/>
+								</td>
+								<td className="text-center  w-1">{user.id}</td>
+								<td className="text-left  w-4">{user.name}</td>
+								<td className="text-left  w-6">{user.email}</td>
+								<td className="text-left  w-3">{user.role}</td>
+								<td className="text-center  w-3">[] []</td>
+							</tr>
+						);
+					})} */}
 				</tbody>
 			</table>
 		</div>
