@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback } from 'react';
-
 import axios from 'axios';
+
+import { UserList } from './UserList';
 import { User } from '../interfaces';
 
 export const Dashboard = () => {
@@ -18,5 +19,5 @@ export const Dashboard = () => {
 		setUsers(data);
 	}, []);
 
-	return <>Dashboard{console.log(users)}</>;
+	return <>{users.length > 0 && <UserList users={users} />}</>;
 };

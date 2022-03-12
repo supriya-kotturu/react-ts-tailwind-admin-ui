@@ -14,7 +14,6 @@ body {
 		sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
-	font-weight: 200;
 }
 
 code {
@@ -23,7 +22,7 @@ code {
 }
 
 .main-container {
-	@apply lg:w-3/5 md:w-3/4 mx-auto p-4;
+	@apply lg:w-full md:w-full mx-auto p-4;
 }
 
 .text-with-bg {
