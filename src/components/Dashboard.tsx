@@ -6,11 +6,20 @@ import { SearchBar } from './SearchBar';
 // import { UserListContext } from '../RootProvider';
 import { UserList } from './UserList';
 import { User } from '../interfaces';
+import { Actions } from './UI/Actions';
+import { EditUserForm } from './EditUserForm';
 
 export const Dashboard = () => {
 	const [users, setUsers] = useState<User[]>([]);
-	// const { usersData, userListDispatch } = useContext(UserListContext);
-	// const users = usersData.userList;
+	const [isEditing, setIsEditing] = useState<boolean>(false);
+	const [hideSearch, setHideSearch] = useState<boolean>(false);
+	const [editingUser, setEditingUser] = useState<User>({
+		id: '',
+		name: '',
+		email: '',
+		role: '',
+		actions: '',
+	});
 
 	useEffect(() => {
 		getUsers();
@@ -19,6 +28,27 @@ export const Dashboard = () => {
 	const setUserListInLocalStorage = useCallback((list: User[]): void => {
 		localStorage.setItem('userList', JSON.stringify(list));
 	}, []);
+
+	const handleEdit = (id: string) => {
+		setIsEditing(true);
+		setHideSearch(true);
+		const targetUser = users.find((user) => user.id === id);
+		setEditingUser(targetUser);
+	};
+
+	const handleUpdateUser = (id: string, newUser: User) => {
+		const currentUserList = getUserList;
+		const newUserList = currentUserList.filter((user: User) => user.id !== id);
+		const updatedList = [...newUserList, newUser];
+		setUserListInLocalStorage(updatedList);
+	};
+
+	const handleDelete = (id: string) => {
+		const currentUserList = getUserList;
+		const updatedList = currentUserList.filter((user: User) => user.id !== id);
+		setUsers(updatedList);
+		setUserListInLocalStorage(updatedList);
+	};
 
 	const getUserList = useMemo(() => {
 		const userList = JSON.parse(localStorage.getItem('userList') || 'null');
@@ -46,9 +76,34 @@ export const Dashboard = () => {
 		setUsers(getUserList);
 	}, []);
 
+	const actionUsers = users.map((user) => ({
+		...user,
+		actions: (
+			<Actions
+				id={user.id}
+				handleEdit={handleEdit}
+				handleDelete={handleDelete}
+			/>
+		),
+	}));
+
 	return (
 		<div className="table-container">
-			{users.length > 0 && <UserList users={users} />}
+			{isEditing && (
+				<EditUserForm
+					currentUser={editingUser}
+					handleCancleUpdate={() => setIsEditing(false)}
+					handleUpdateUser={handleUpdateUser}
+				/>
+			)}
+			{users.length > 0 && (
+				<UserList
+					users={users}
+					hideSearch={hideSearch}
+					handleDelete={handleDelete}
+					handleEdit={handleEdit}
+				/>
+			)}
 		</div>
 	);
 };

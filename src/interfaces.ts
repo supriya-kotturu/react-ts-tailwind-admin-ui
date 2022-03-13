@@ -1,8 +1,11 @@
+import { ReactNode } from 'react';
+
 export interface User {
 	id: string;
 	name: string;
 	email: string;
 	role: string;
+	actions: ReactNode;
 }
 
 export interface Message {

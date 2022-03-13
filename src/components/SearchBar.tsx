@@ -7,10 +7,10 @@ interface SearchBarProps {
 export const SearchBar = ({ filter, setFilter }: SearchBarProps) => {
 	return (
 		<div>
-			<label className="relative block m-1.5">
+			<label className="form-label">
 				<input
-					className="placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-indigo-200 focus:ring-indigo-200 focus:ring-1 sm:text-sm"
-					placeholder="Search for anything..."
+					className="form-input"
+					placeholder="Search by name, email, roles, etc.."
 					type="text"
 					name="search"
 					value={filter || ''}

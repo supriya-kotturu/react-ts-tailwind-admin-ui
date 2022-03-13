@@ -30,11 +30,11 @@ code {
 }
 
 .table-container {
-	@apply bg-indigo-100 dark:bg-slate-600 p-2 lg:w-3/5 mx-auto md:w-full rounded-lg shadow-lg;
+	@apply bg-indigo-100 dark:bg-slate-600 p-2 lg:w-3/4 mx-auto md:w-full rounded-lg shadow-lg;
 }
 
 .user-table {
-	@apply table-auto w-full border-separate;
+	@apply table-auto w-full border-separate sm:overflow-hidden  md:overflow-hidden;
 }
 
 .header-row {
@@ -55,4 +55,20 @@ tr > td {
 
 .button-icon {
 	@apply h-4 mx-auto text-indigo-900 dark:text-indigo-200 text-xl;
+}
+
+.form-label {
+	@apply relative block m-1.5;
+}
+
+.form-input {
+	@apply placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-indigo-200 focus:ring-indigo-200 focus:ring-1 sm:text-sm;
+}
+
+.submit-button {
+	@apply bg-teal-400 py-1.5 px-2 rounded-lg m-1.5;
+}
+
+.cancel-button {
+	@apply bg-gray py-1.5 px-2 rounded-lg m-1.5;
 }

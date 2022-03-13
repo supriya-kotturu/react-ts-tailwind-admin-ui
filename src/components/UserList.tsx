@@ -5,9 +5,13 @@ import { SearchBar } from './SearchBar';
 import { NextButton } from './UI/NextButton';
 import { PageButton } from './UI/PageButton';
 import { PreviousButton } from './UI/PreviousButton';
+import { Actions } from './UI/Actions';
 
 interface UserListProps {
 	users: User[];
+	hideSearch: boolean;
+	handleDelete: (id: string) => void;
+	handleEdit: (id: string) => void;
 	children?: ReactNode;
 }
 
@@ -33,16 +37,34 @@ const USER_LIST_COLUMNS: UserTableColumns[] = [
 		Header: 'Role',
 		accessor: 'role',
 	},
-	// TODO : Remove the action
-	// {
-	// 	Header: 'Actions',
-	// 	accessor: 'id',
-	// },
+	{
+		Header: 'Actions',
+		accessor: 'actions',
+	},
 ];
 
-export const UserList = ({ users }: UserListProps) => {
+export const UserList = ({
+	users,
+	hideSearch,
+	handleDelete,
+	handleEdit,
+}: UserListProps) => {
 	const userTableColumns = useMemo(() => USER_LIST_COLUMNS, []);
-	const userData = useMemo(() => users, []);
+
+	const userData = useMemo(
+		() =>
+			users.map((user) => ({
+				...user,
+				actions: (
+					<Actions
+						id={user.id}
+						handleEdit={handleEdit}
+						handleDelete={handleDelete}
+					/>
+				),
+			})),
+		[users]
+	);
 
 	const tableInstance = useTable(
 		{
@@ -75,7 +97,9 @@ export const UserList = ({ users }: UserListProps) => {
 
 	return (
 		<>
-			<SearchBar filter={globalFilter} setFilter={setGlobalFilter} />
+			{!hideSearch && (
+				<SearchBar filter={globalFilter} setFilter={setGlobalFilter} />
+			)}
 			<div>
 				<table
 					className="user-table"
@@ -107,25 +131,6 @@ export const UserList = ({ users }: UserListProps) => {
 								</tr>
 							);
 						})}
-
-						{/* TODO : Remove comments  */}
-						{/* {users.map((user: User) => {
-						return (
-							<tr key={user.id}>
-								<td className="text-center  w-1">
-									<input
-										type="checkbox"
-										className="form-check-input h-5 w-5 border border-r-10 border-indigo-900 rounded-lg bg-white checked:bg-indigo-100 checked:border-indigo-200 focus:outline-none transition duration-200 bg-center cursor-pointer"
-									/>
-								</td>
-								<td className="text-center  w-1">{user.id}</td>
-								<td className="text-left  w-4">{user.name}</td>
-								<td className="text-left  w-6">{user.email}</td>
-								<td className="text-left  w-3">{user.role}</td>
-								<td className="text-center  w-3">[] []</td>
-							</tr>
-						);
-					})} */}
 					</tbody>
 				</table>
 				<div className="content-center">
