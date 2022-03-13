@@ -1,4 +1,6 @@
-import React, { useReducer, createContext, ReactNode } from 'react';
+// @ts-nocheck
+import React, { Dispatch, useReducer, createContext, ReactNode } from 'react';
+import { Message, User } from './interfaces';
 
 import {
 	userReducer,
@@ -8,14 +10,28 @@ import {
 	getUsers,
 } from './store/index';
 import { MessageActions } from './store/message/messageActionTypes';
+import { UserActions } from './store/users/userActionsTypes';
 
-export const UserListContext = createContext({
-	userData: {},
+interface MessageContextInterface {
+	message: Message;
+	messageDispatch: Dispatch<MessageActions>;
+}
+
+interface UserListContextInterface {
+	userData: {
+		userList: User[];
+		selectedUser: User;
+	};
+	userDispatch: Dispatch<UserActions>;
+}
+
+export const UserListContext = createContext<UserListContextInterface>({
+	userData: initialUserListState,
 	userListDispatch: () => {},
 });
 
-export const MessageContext = createContext({
-	message: {},
+export const MessageContext = createContext<MessageContextInterface>({
+	message: initialMessageState,
 	messageDispatch: () => {},
 });
 

@@ -12,6 +12,7 @@ const defaultUser: User = {
 	name: '',
 	email: '',
 	role: '',
+	actions: '',
 };
 
 export const initialUserListState: initialUserStateType = {
@@ -47,7 +48,7 @@ function getUser(id: string): User {
 function getUserList(): User[] {
 	return localStorage.getItem('userList') === null
 		? []
-		: JSON.parse(localStorage.getItem('userList'));
+		: JSON.parse(localStorage.getItem('userList') || '');
 }
 
 export function setUserList(newUserList: User[]) {
