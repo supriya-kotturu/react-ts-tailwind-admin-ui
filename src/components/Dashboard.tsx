@@ -43,7 +43,10 @@ export const Dashboard = () => {
 		const currentUserList = getUserList;
 		const newUserList = currentUserList.filter((user: User) => user.id !== id);
 		const updatedList = [...newUserList, newUser];
-		setUserListInLocalStorage(updatedList);
+		const sortedList = updatedList.sort(
+			(a, b) => parseInt(a.id) - parseInt(b.id)
+		);
+		setUserListInLocalStorage(sortedList);
 	};
 
 	const handleDelete = (id: string) => {
