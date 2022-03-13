@@ -76,17 +76,6 @@ export const Dashboard = () => {
 		setUsers(getUserList);
 	}, []);
 
-	const actionUsers = users.map((user) => ({
-		...user,
-		actions: (
-			<Actions
-				id={user.id}
-				handleEdit={handleEdit}
-				handleDelete={handleDelete}
-			/>
-		),
-	}));
-
 	return (
 		<div className="table-container">
 			{isEditing && (
