@@ -1,3 +1,4 @@
+// @ts-nocheck
 import React, { ReactNode, useMemo } from 'react';
 import { useTable, useGlobalFilter, usePagination } from 'react-table';
 import { User } from '../interfaces';

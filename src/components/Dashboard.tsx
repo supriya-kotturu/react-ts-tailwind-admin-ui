@@ -31,7 +31,7 @@ export const Dashboard = () => {
 		setIsEditing(true);
 		setHideSearch(true);
 		const targetUser = users.find((user) => user.id === id);
-		setEditingUser(targetUser);
+		if (targetUser) setEditingUser(targetUser);
 	};
 
 	const handleUpdateUser = (id: string, newUser: User) => {
