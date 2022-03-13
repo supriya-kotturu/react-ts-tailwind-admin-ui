@@ -34,6 +34,11 @@ export const Dashboard = () => {
 		if (targetUser) setEditingUser(targetUser);
 	};
 
+	const handleCancelUpdate = () => {
+		setHideSearch(false);
+		setIsEditing(false);
+	};
+
 	const handleUpdateUser = (id: string, newUser: User) => {
 		const currentUserList = getUserList;
 		const newUserList = currentUserList.filter((user: User) => user.id !== id);
@@ -79,7 +84,7 @@ export const Dashboard = () => {
 			{isEditing && (
 				<EditUserForm
 					currentUser={editingUser}
-					handleCancleUpdate={() => setIsEditing(false)}
+					handleCancleUpdate={handleCancelUpdate}
 					handleUpdateUser={handleUpdateUser}
 				/>
 			)}
