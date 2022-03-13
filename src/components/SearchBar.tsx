@@ -1,6 +1,10 @@
 import React from 'react';
+interface SearchBarProps {
+	filter: '';
+	setFilter: (value: string) => void;
+}
 
-export const SearchBar = () => {
+export const SearchBar = ({ filter, setFilter }: SearchBarProps) => {
 	return (
 		<div>
 			<label className="relative block m-1.5">
@@ -9,6 +13,10 @@ export const SearchBar = () => {
 					placeholder="Search for anything..."
 					type="text"
 					name="search"
+					value={filter || ''}
+					onChange={(e) => {
+						setFilter(e.target.value);
+					}}
 				/>
 			</label>
 		</div>

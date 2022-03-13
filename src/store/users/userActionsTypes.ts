@@ -3,6 +3,7 @@ import { User } from '../../interfaces';
 export type UserActionType =
 	| 'GET_USER'
 	| 'GET_USERS'
+	| 'SET_USERS'
 	| 'EDIT_USER'
 	| 'DELETE_USER'
 	| 'DELETE_SELECTED_USERS';
@@ -16,6 +17,11 @@ export type GetUserAction = {
 
 export type GetUsersAction = {
 	type: 'GET_USERS';
+};
+
+export type SetUserListAction = {
+	type: 'SET_USERS';
+	payload: User[];
 };
 
 export type EditUserAction = {
@@ -43,6 +49,7 @@ export type DeleteSelectedUsersAction = {
 export type UserActions =
 	| GetUserAction
 	| GetUsersAction
+	| SetUserListAction
 	| EditUserAction
 	| DeleteUserAction
 	| DeleteSelectedUsersAction;

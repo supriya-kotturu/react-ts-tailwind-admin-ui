@@ -1,13 +1,16 @@
 import { MessageActions } from './messageActionTypes';
 import { Message } from '../../interfaces';
 
-const initialMessageState: Message = {
+export const initialMessageState: Message = {
 	type: '',
 	title: '',
 	description: '',
 };
 
-export function messageReducer(state: Message, action: MessageActions) {
+export function messageReducer(
+	state: Message,
+	action: MessageActions
+): Message {
 	switch (action.type) {
 		case 'SET_ERROR_MESSAGE':
 			return action.payload;
@@ -18,6 +21,6 @@ export function messageReducer(state: Message, action: MessageActions) {
 		case 'RESET_MESSAGE':
 			return initialMessageState;
 		default:
-			state;
+			return state;
 	}
 }

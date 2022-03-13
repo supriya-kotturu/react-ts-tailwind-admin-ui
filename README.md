@@ -23,13 +23,24 @@
 
 - [x] set up tailwind.css - reusable classnames with @apply
 - [ ] Dashboard Component Layout - fetches the usernames
-  - [ ] Seach Component - child of Dashboard
+  - [x] Seach Component - child of Dashboard
   - [x] List Component - table component containing the list of user
     - [ ] Implement checkbox-select
     - [ ] Edit User
     - [ ] Delete User
-- [ ] Pagination
+- [x] Pagination
+- [x] Dark mode based on user system pereferences
 - [ ] Optimize component rerendering
+- [ ] Add Redux for State Management
+- [ ] Add Toggle button for dark mode
+
+### Note : Dark mode
+
+Page automatically switches to dark mode based on current system preferences of the user.
+
+To try light/dark mode try switching the system preferences to dark mode
+
+- On windows, go to settings > prersonalization > colors > choose dark/light in the dropdown
 
 ## Tech stack
 

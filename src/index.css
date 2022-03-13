@@ -42,9 +42,17 @@ code {
 }
 
 tr > th {
-	@apply lg:p-4 md:p-3.5 sm:p-3  bg-indigo-200 dark:bg-slate-900 dark:text-indigo-100 shadow-lg rounded-lg py-4 px-2 text-left;
+	@apply lg:p-4 md:p-3.5 sm:p-3  bg-indigo-200 dark:bg-slate-900 dark:text-indigo-200 shadow-lg rounded-lg py-4 px-2 text-left;
 }
 
 tr > td {
-	@apply lg:p-4 md:p-3.5 sm:p-3 bg-slate-50 shadow-lg dark:bg-slate-700 dark:text-indigo-100 rounded-lg m-2 py-4 px-2;
+	@apply lg:p-4 md:p-3.5 sm:p-3 bg-slate-50 shadow-lg dark:bg-slate-700 dark:text-indigo-200 rounded-lg m-2 py-4 px-2;
+}
+
+.button {
+	@apply w-10 h-10 rounded-full bg-indigo-200 dark:bg-slate-900 shadow-lg mx-2 my-3 disabled:opacity-75 disabled:bg-gray;
+}
+
+.button-icon {
+	@apply h-4 mx-auto text-indigo-900 dark:text-indigo-200 text-xl;
 }

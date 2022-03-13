@@ -1,5 +1,6 @@
 import { UserActions } from './userActionsTypes';
 import { User } from '../../interfaces';
+import axios from 'axios';
 
 type initialUserStateType = {
 	userList: User[];
@@ -13,10 +14,26 @@ const defaultUser: User = {
 	role: '',
 };
 
-function getIsNewUSerStatus() {
+export const initialUserListState: initialUserStateType = {
+	userList: [],
+	selectedUser: defaultUser,
+};
+
+async function getInitUserList(): Promise<void> {
+	const url = import.meta.env.VITE_API_ENDPOINT;
+	const response = await axios.get(`${url}/adminui-problem/members.json`);
+	const data = await response.data;
+	setUserList(data);
+}
+
+function getIsNewUSerStatus(): boolean {
 	return localStorage.getItem('isNewUser') === null
 		? true
-		: JSON.parse(localStorage.getItem('isNewUser') || '{}');
+		: JSON.parse(localStorage.getItem('isNewUser') || 'true');
+}
+
+function setIsNewUSerStatus(status: boolean): void {
+	localStorage.setItem('isNewUser', JSON.stringify(status));
 }
 
 function getUser(id: string): User {
@@ -30,11 +47,16 @@ function getUser(id: string): User {
 function getUserList(): User[] {
 	return localStorage.getItem('userList') === null
 		? []
-		: JSON.parse(localStorage.getItem('userList') || '{}');
+		: JSON.parse(localStorage.getItem('userList'));
 }
 
-function setUserList(newUserList: User[]) {
+export function setUserList(newUserList: User[]) {
 	localStorage.setItem('userList', JSON.stringify(newUserList));
+}
+
+function setUserListState(newUserList: User[]): User[] {
+	setUserList(newUserList);
+	return newUserList;
 }
 
 function editUser(id: string, newUser: User): User[] {
@@ -72,6 +94,11 @@ export function userReducer(state: initialUserStateType, action: UserActions) {
 			return {
 				...state,
 				userList: getUserList(),
+			};
+		case 'SET_USERS':
+			return {
+				...state,
+				userList: setUserListState(action.payload),
 			};
 		case 'EDIT_USER':
 			return {

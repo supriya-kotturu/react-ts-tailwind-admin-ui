@@ -4,6 +4,7 @@ import {
 	EditUserAction,
 	DeleteUserAction,
 	DeleteSelectedUsersAction,
+	SetUserListAction,
 } from './userActionsTypes';
 import { User } from '../../interfaces';
 
@@ -19,6 +20,13 @@ export function getUser(id: string): GetUserAction {
 export function getUsers(): GetUsersAction {
 	return {
 		type: 'GET_USERS',
+	};
+}
+
+export function setUsers(userList: User[]): SetUserListAction {
+	return {
+		type: 'SET_USERS',
+		payload: userList,
 	};
 }
 

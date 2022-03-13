@@ -1,6 +1,10 @@
 import React, { ReactNode, useMemo } from 'react';
-import { useTable } from 'react-table';
+import { useTable, useGlobalFilter, usePagination } from 'react-table';
 import { User } from '../interfaces';
+import { SearchBar } from './SearchBar';
+import { NextButton } from './UI/NextButton';
+import { PageButton } from './UI/PageButton';
+import { PreviousButton } from './UI/PreviousButton';
 
 interface UserListProps {
 	users: User[];
@@ -40,45 +44,72 @@ export const UserList = ({ users }: UserListProps) => {
 	const userTableColumns = useMemo(() => USER_LIST_COLUMNS, []);
 	const userData = useMemo(() => users, []);
 
-	const { getTableProps, getTableBodyProps, headerGroups, rows, prepareRow } =
-		useTable({
+	const tableInstance = useTable(
+		{
 			columns: userTableColumns,
 			data: userData,
-		});
+		},
+		useGlobalFilter,
+		usePagination
+	);
+
+	const {
+		getTableProps,
+		getTableBodyProps,
+		headerGroups,
+		page,
+		nextPage,
+		previousPage,
+		canNextPage,
+		canPreviousPage,
+		prepareRow,
+		pageOptions,
+		gotoPage,
+		pageCount,
+		state,
+		setGlobalFilter,
+	} = tableInstance;
+
+	const { globalFilter, pageIndex } = state;
+	const pageNumbers = [...Array(pageCount).keys()];
 
 	return (
-		<div>
-			<table
-				className="user-table"
-				cellSpacing={8}
-				cellPadding={4}
-				{...getTableProps()}
-			>
-				<thead>
-					{headerGroups.map((headerGroup) => (
-						<tr className="header-row" {...headerGroup.getHeaderGroupProps()}>
-							{headerGroup.headers.map((column) => (
-								<th {...column.getHeaderProps()}>{column.render('Header')}</th>
-							))}
-						</tr>
-					))}
-				</thead>
-				<tbody {...getTableBodyProps()}>
-					{rows.map((row) => {
-						prepareRow(row);
-						return (
-							<tr {...row.getRowProps()}>
-								{row.cells.map((cell) => {
-									return (
-										<td {...cell.getCellProps()}>{cell.render('Cell')}</td>
-									);
-								})}
+		<>
+			<SearchBar filter={globalFilter} setFilter={setGlobalFilter} />
+			<div>
+				<table
+					className="user-table"
+					cellSpacing={8}
+					cellPadding={4}
+					{...getTableProps()}
+				>
+					<thead>
+						{headerGroups.map((headerGroup) => (
+							<tr className="header-row" {...headerGroup.getHeaderGroupProps()}>
+								{headerGroup.headers.map((column) => (
+									<th {...column.getHeaderProps()}>
+										{column.render('Header')}
+									</th>
+								))}
 							</tr>
-						);
-					})}
+						))}
+					</thead>
+					<tbody {...getTableBodyProps()}>
+						{page.map((row) => {
+							prepareRow(row);
+							return (
+								<tr {...row.getRowProps()}>
+									{row.cells.map((cell) => {
+										return (
+											<td {...cell.getCellProps()}>{cell.render('Cell')}</td>
+										);
+									})}
+								</tr>
+							);
+						})}
 
-					{/* TODO : Remove comments  */}
-					{/* {users.map((user: User) => {
+						{/* TODO : Remove comments  */}
+						{/* {users.map((user: User) => {
 						return (
 							<tr key={user.id}>
 								<td className="text-center  w-1">
@@ -95,8 +126,26 @@ export const UserList = ({ users }: UserListProps) => {
 							</tr>
 						);
 					})} */}
-				</tbody>
-			</table>
-		</div>
+					</tbody>
+				</table>
+				<div className="content-center">
+					<PreviousButton
+						handlePreviousPage={() => previousPage()}
+						disabled={!canPreviousPage}
+					/>
+					{pageNumbers.map((page) => (
+						<PageButton
+							handlePageButton={() => gotoPage(page)}
+							disabled={!canNextPage}
+							page={page + 1}
+						/>
+					))}
+					<NextButton
+						handleNextPage={() => nextPage()}
+						disabled={!canNextPage}
+					/>
+				</div>
+			</div>
+		</>
 	);
 };
