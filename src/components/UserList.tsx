@@ -92,7 +92,7 @@ export const UserList = ({
 		setGlobalFilter,
 	} = tableInstance;
 
-	const { globalFilter, pageIndex } = state;
+	const { globalFilter } = state;
 	const pageNumbers = [...Array(pageCount).keys()];
 
 	return (

@@ -1,12 +1,10 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import axios from 'axios';
-import { SearchBar } from './SearchBar';
 
 // import { setUsers } from '../store';
 // import { UserListContext } from '../RootProvider';
 import { UserList } from './UserList';
 import { User } from '../interfaces';
-import { Actions } from './UI/Actions';
 import { EditUserForm } from './EditUserForm';
 
 export const Dashboard = () => {

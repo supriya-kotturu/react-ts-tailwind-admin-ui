@@ -64,7 +64,9 @@ export const EditUserForm = ({
 			<button className="submit-button" onClick={handleSubmit}>
 				Submit
 			</button>
-			<button className="cancel-button">Cancel</button>
+			<button className="cancel-button" onClick={handleCancleUpdate}>
+				Cancel
+			</button>
 		</form>
 	);
 };
