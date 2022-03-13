@@ -26,13 +26,14 @@
   - [x] Seach Component - child of Dashboard
   - [x] List Component - table component containing the list of user
     - [ ] Implement checkbox-select
-    - [ ] Edit User
-    - [ ] Delete User
+    - [x] Edit User
+    - [x] Delete User
 - [x] Pagination
 - [x] Dark mode based on user system pereferences
 - [ ] Optimize component rerendering
 - [ ] Add Redux for State Management
 - [ ] Add Toggle button for dark mode
+- [x] Publish on Netlify
 
 ### Note : Dark mode
 
@@ -47,3 +48,7 @@ To try light/dark mode try switching the system preferences to dark mode
 - react
 - typescript
 - tailwind
+
+## Netlify
+
+Try it on [https://react-ts-tailwind-admin-ui.netlify.app](https://react-ts-tailwind-admin-ui.netlify.app)
