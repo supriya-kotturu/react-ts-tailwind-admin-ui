@@ -14,6 +14,10 @@
   ```
   npm run build
   ```
+- Run the tests
+  ```
+  npm run test
+  ```
 - Locally preview the production build
   ```
   npm run preview
@@ -43,6 +47,10 @@ Page automatically switches to dark mode based on current system preferences of 
 To try light/dark mode try switching the system preferences to dark mode
 
 - On windows, go to settings > prersonalization > colors > choose dark/light in the dropdown
+
+### Note : Unit tests
+
+Tests are still not written for the components.
 
 ## Tech stack
 
