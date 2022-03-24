@@ -48,6 +48,9 @@ To try light/dark mode try switching the system preferences to dark mode
 
 - On windows, go to settings > prersonalization > colors > choose dark/light in the dropdown
 
+<img src="./img/dark.png" width="500" alt="dark mode"/>
+<img src="./img/light.png" width="500" alt="light mode"/>
+
 ### Note : Unit tests
 
 Tests are still not written for the components.
