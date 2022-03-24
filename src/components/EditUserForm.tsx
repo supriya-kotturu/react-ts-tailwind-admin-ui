@@ -27,44 +27,44 @@ export const EditUserForm = ({
 	};
 
 	return (
-		<form className="w-full flex-row  flex justify-center mx-auto p-4">
-			<label className="form-label">
+		<form className='edit-form'>
+			<label className='form-label'>
 				<input
-					className="form-input"
-					placeholder="User Name"
-					type="text"
-					name="userName"
-					id="userName"
+					className='form-input'
+					placeholder='User Name'
+					type='text'
+					name='userName'
+					id='userName'
 					value={name}
 					onChange={(e) => setName(e.target.value)}
 				/>
 			</label>
-			<label className="form-label">
+			<label className='form-label'>
 				<input
-					className="form-input"
-					placeholder="Email"
-					type="email"
-					name="email"
-					id="email"
+					className='form-input'
+					placeholder='Email'
+					type='email'
+					name='email'
+					id='email'
 					value={email}
 					onChange={(e) => setEmail(e.target.value)}
 				/>
 			</label>
-			<label className="form-label">
+			<label className='form-label'>
 				<input
-					className="form-input"
-					placeholder="Role"
-					type="text"
-					name="role"
-					id="role"
+					className='form-input'
+					placeholder='Role'
+					type='text'
+					name='role'
+					id='role'
 					value={role}
 					onChange={(e) => setRole(e.target.value)}
 				/>
 			</label>
-			<button className="submit-button" onClick={handleSubmit}>
+			<button className='submit-button' onClick={handleSubmit}>
 				Submit
 			</button>
-			<button className="cancel-button" onClick={handleCancleUpdate}>
+			<button className='cancel-button' onClick={handleCancleUpdate}>
 				Cancel
 			</button>
 		</form>

@@ -22,10 +22,10 @@
 ## Todo
 
 - [x] set up tailwind.css - reusable classnames with @apply
-- [ ] Dashboard Component Layout - fetches the usernames
+- [x] Dashboard Component Layout - fetches the usernames
   - [x] Seach Component - child of Dashboard
   - [x] List Component - table component containing the list of user
-    - [ ] Implement checkbox-select
+    - [x] Implement checkbox-select
     - [x] Edit User
     - [x] Delete User
 - [x] Pagination
@@ -33,6 +33,7 @@
 - [ ] Optimize component rerendering
 - [ ] Add Redux for State Management
 - [ ] Add Toggle button for dark mode
+- [ ] Add Unit Tests
 - [x] Publish on Netlify
 
 ### Note : Dark mode
@@ -47,7 +48,7 @@ To try light/dark mode try switching the system preferences to dark mode
 
 - react
 - typescript
-- tailwind
+- tailwindcss
 
 ## Netlify
 

@@ -44,7 +44,7 @@ export const Dashboard = () => {
 		const newUserList = currentUserList.filter((user: User) => user.id !== id);
 		const updatedList = [...newUserList, newUser];
 		const sortedList = updatedList.sort(
-			(a, b) => parseInt(a.id) - parseInt(b.id)
+			(a, b) => parseInt(a.id) - parseInt(b.id),
 		);
 		setUserListInLocalStorage(sortedList);
 	};
@@ -83,7 +83,7 @@ export const Dashboard = () => {
 	}, []);
 
 	return (
-		<div className="table-container">
+		<div className='table-container'>
 			{isEditing && (
 				<EditUserForm
 					currentUser={editingUser}
@@ -97,6 +97,8 @@ export const Dashboard = () => {
 					hideSearch={hideSearch}
 					handleDelete={handleDelete}
 					handleEdit={handleEdit}
+					setUsers={setUsers}
+					setUserListInLocalStorage={setUserListInLocalStorage}
 				/>
 			)}
 		</div>

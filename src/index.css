@@ -57,12 +57,16 @@ tr > td {
 	@apply h-4 mx-auto text-indigo-900 dark:text-indigo-200 text-xl;
 }
 
+.edit-form {
+	@apply w-full flex-row  flex justify-center mx-auto px-1.5 py-0;
+}
+
 .form-label {
 	@apply relative block m-1.5;
 }
 
 .form-input {
-	@apply placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-9 pr-3 shadow-sm focus:outline-none focus:border-indigo-200 focus:ring-indigo-200 focus:ring-1 sm:text-sm;
+	@apply placeholder:text-slate-400 block bg-white w-full border border-slate-300 rounded-md py-2 pl-4 pr-3 shadow-sm focus:outline-none focus:border-indigo-200 focus:ring-indigo-200 focus:ring-1 sm:text-sm;
 }
 
 .submit-button {
@@ -71,4 +75,12 @@ tr > td {
 
 .cancel-button {
 	@apply bg-gray py-1.5 px-2 rounded-lg m-1.5;
+}
+
+.buttons-container {
+	@apply flex;
+}
+
+.delete-all-button {
+	@apply bg-red-300 text-lg text-slate-800 px-2 py-1 m-1.5 mr-4 w-32 rounded-lg shadow-lg;
 }
